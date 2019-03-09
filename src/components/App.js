@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, FormControl, Button } from "react-bootstrap";
 import "./App.css";
+import AgeStats from "./AgeStats";
 
 class App extends Component {
   constructor() {
@@ -8,13 +9,17 @@ class App extends Component {
 
     this.state = {
       newDate: "",
-      birthday: "1991-04-30"
+      birthday: "1991-04-30",
+      showStats: false
     };
   }
 
   changeBirthday() {
     console.log(this.state);
-    this.setState({ birthday: this.state.newDate });
+    this.setState({
+      birthday: this.state.newDate,
+      showStats: true
+    });
   }
 
   render() {
@@ -27,6 +32,13 @@ class App extends Component {
             onChange={event => this.setState({ newDate: event.target.value })}
           />{" "}
           <Button onClick={() => this.changeBirthday()}>Submit</Button>
+          {this.state.showStats ? (
+            <div className="fade age-stats">
+              <AgeStats date={this.state.birthday} />
+            </div>
+          ) : (
+            <div />
+          )}
         </Form>
       </div>
     );
